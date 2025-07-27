@@ -1,19 +1,28 @@
 {
-  "name": "Node.js Development",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-buster",
+  "name": "SimpleBot Dev Environment",
+  // Usar una imagen base moderna basada en Ubuntu 22.04
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  // Instalar características (features) necesarias
   "features": {
+    // Instalar Node.js versión 20
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts",
-      "installNpm": true,
-      "installYarn": false,
-      "installPnpm": false
-    }
+      "version": "20"
+    },
+    // Instalar Python versión 3.10
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.10"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "postStartCommand": "bash /workspaces/vacio/iniciar_procesos.sh",
+  // Comando que se ejecuta después de crear el contenedor
+  // Llama directamente a tu script de instalación/configuración
+  "postCreateCommand": "bash ./iniciar_procesos.sh",
   "customizations": {
     "vscode": {
       "terminal.integrated.defaultProfile.linux": "bash",
       "extensions": [
+        "ms-python.python",
+        "ms-vscode.vscode-typescript-next",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode"
       ]
